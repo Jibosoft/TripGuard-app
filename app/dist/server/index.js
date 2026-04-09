@@ -1,3 +1,5 @@
+import express from "express":
+import path from "path";
 const express = require('express');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
@@ -7,11 +9,14 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'tripguard-secret-key-2026';
 
 // Middleware
-app.use(cors());
+app.use(express.static(path.join(__dirname, "../dist")));
+app.use(cors({
+  origin: "https://tripguard-app.onrender.com"
+}));
 app.use(express.json());
 
 // Data file path
@@ -26,7 +31,7 @@ function initDataFile() {
         {
           id: 'admin-001',
           email: 'admin@tripguard.com',
-          password: bcrypt.hashSync('admin123', 10),
+          password: bcrypt.hashSync('Emma6795@', 10),
           name: 'System Admin',
           role: 'admin',
           createdAt: new Date().toISOString()
@@ -507,9 +512,20 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
+});
+
+// Serve frontend
+app.use(express.static(path.join(__dirname, "../dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`TripGuard API Server running on port ${PORT}`);
-  console.log(`Health check: http://localhost:${PORT}/api/health`);
+  console.log(`Health check: /api/health`);
   initDataFile();
 });
