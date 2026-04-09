@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 220 20% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 15%;
+    --primary: 175 60% 35%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 15 80% 60%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 20% 96%;
+    --muted-foreground: 220 10% 45%;
+    --accent: 45 90% 55%;
+    --accent-foreground: 220 20% 15%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: 175 60% 35%;
+    --radius: 0.75rem;
+    
+    /* TripGuard Brand Colors */
+    --tg-teal: 175 60% 35%;
+    --tg-coral: 15 80% 60%;
+    --tg-gold: 45 90% 55%;
+    --tg-navy: 220 40% 20%;
+    --tg-sand: 35 30% 95%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .gradient-teal {
+    background: linear-gradient(135deg, hsl(var(--tg-teal)) 0%, hsl(175 50% 45%) 100%);
+  }
+  .gradient-coral {
+    background: linear-gradient(135deg, hsl(var(--tg-coral)) 0%, hsl(15 70% 70%) 100%);
+  }
+  .gradient-hero {
+    background: linear-gradient(135deg, hsl(175 60% 25%) 0%, hsl(220 40% 20%) 100%);
+  }
+  .glass {
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.85);
+  }
+  .glass-dark {
+    backdrop-filter: blur(12px);
+    background: rgba(15, 23, 42, 0.85);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--tg-teal));
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(175 60% 30%);
+}
+
+/* Animation keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+.animate-slide-up {
+  animation: slide-up 0.6s ease-out forwards;
+}
