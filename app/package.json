@@ -7,7 +7,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "node server/index.js"",
+    "start": "node server/index.js",
     "server": "node server/index.js",
     "build:prod": "npm run build && cp -r server dist/ && cp package.json dist/"
   },
